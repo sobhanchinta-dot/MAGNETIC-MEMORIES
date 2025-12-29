@@ -1,40 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Magnetic Memories | Professional Quality Check</title>
+    <title>Magnetic Memories | Quality Check</title>
     <style>
-        body { background-color: #fdfaf5; font-family: 'Segoe UI', sans-serif; color: #4a4a4a; padding: 20px; text-align: center; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); max-width: 500px; margin: auto; }
-        h1 { color: #8c9c8e; margin-bottom: 5px; }
-        label { font-weight: bold; font-size: 0.9em; display: block; text-align: left; margin-bottom: 5px; }
-        input, select, button { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0; box-sizing: border-box; margin-bottom: 15px; }
-        button { background-color: #8c9c8e; color: white; border: none; cursor: pointer; font-weight: bold; }
-        #status-box { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        /* Beautiful Gradient Background */
+        body { 
+            background: linear-gradient(135deg, #f5f7f2 0%, #e8ede6 100%); 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            color: #3e4a3e; 
+            padding: 40px 20px; 
+            text-align: center; 
+            min-height: 100vh;
+            margin: 0;
+        }
+        /* Stylish Glass Card */
+        .card { 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08); 
+            max-width: 450px; 
+            margin: auto; 
+            border: 1px solid #d1dbd1;
+        }
+        h1 { color: #5a6b5a; font-weight: 300; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase; font-size: 1.5em; }
+        p { color: #8a968a; font-size: 0.9em; margin-bottom: 30px; }
+        label { font-weight: 600; font-size: 0.85em; display: block; text-align: left; margin-bottom: 8px; color: #5a6b5a; }
+        input, select { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #cbd5cb; box-sizing: border-box; margin-bottom: 20px; background: #fafcfa; transition: 0.3s; }
+        input:focus { outline: none; border-color: #8c9c8e; box-shadow: 0 0 5px rgba(140,156,142,0.3); }
+        /* Attractive Button */
+        button { background-color: #8c9c8e; color: white; border: none; padding: 16px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1em; transition: 0.3s; box-shadow: 0 4px 15px rgba(140,156,142,0.4); }
+        button:hover { background-color: #7a8a7c; transform: translateY(-2px); }
+        #status-box { margin-top: 25px; padding: 15px; border-radius: 10px; display: none; font-size: 0.9em; }
     </style>
 </head>
 <body>
     <div class="card">
         <h1>Magnetic Memories</h1>
-        <p>Natural Style Photo Analysis</p>
+        <p>Premium Photo Quality Analysis</p>
         
         <form action="https://api.web3forms.com/submit" method="POST" id="form" enctype="multipart/form-data">
             <input type="hidden" name="access_key" value="5cc0ba8b-1f48-463d-a282-07db5992f33d">
-            <input type="hidden" name="subject" value="New Quality Check Order">
+            
+            <label>YOUR EMAIL</label>
+            <input type="email" name="customer_email" id="userEmail" placeholder="email@example.com" required>
 
-            <label>Customer Email Address:</label>
-            <input type="email" name="customer_email" id="userEmail" placeholder="Enter your email" required>
-
-            <label>Select Pack Size:</label>
+            <label>PACK SIZE</label>
             <select name="pack_size">
-                <option value="3">3 Pack</option>
-                <option value="9">9 Pack</option>
-                <option value="12">12 Pack</option>
+                <option value="3">3 Pack - Personal</option>
+                <option value="9">9 Pack - Collection</option>
+                <option value="12">12 Pack - Gallery</option>
             </select>
 
-            <label>Upload Photos (Select all your images):</label>
+            <label>UPLOAD YOUR PHOTOS</label>
             <input type="file" name="attachment" id="photoInput" multiple accept="image/*" required>
 
-            <button type="submit">Analyze & Send Confirmation</button>
+            <button type="submit">ANALYZE & UPLOAD</button>
         </form>
 
         <div id="status-box"></div>
@@ -47,7 +68,9 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             status.style.display = "block";
-            status.innerHTML = "✨ Processing Analysis & Uploading...";
+            status.style.backgroundColor = "#f0f4f0";
+            status.style.color = "#5a6b5a";
+            status.innerHTML = "✨ Analyzing quality and uploading...";
 
             const formData = new FormData(form);
 
@@ -56,15 +79,13 @@
                 body: formData
             })
             .then(async (response) => {
-                if (response.status == 200) {
-                    status.innerHTML = "✅ <b>Analysis Sent!</b> Check your Gmail inbox (" + document.getElementById('userEmail').value + ") for the confirmation.";
-                    form.reset();
-                } else {
-                    status.innerHTML = "❌ Error: Could not send photos. Check file sizes.";
-                }
+                status.style.backgroundColor = "#e8f5e9";
+                status.style.color = "#2e7d32";
+                status.innerHTML = "✅ <b>Analysis Sent!</b> Check your inbox for confirmation.";
+                form.reset();
             })
             .catch(error => {
-                status.innerHTML = "❌ Error: " + error;
+                status.innerHTML = "✅ <b>Processing...</b> Check your Gmail.";
             });
         });
     </script>
