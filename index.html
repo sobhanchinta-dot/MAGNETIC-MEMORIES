@@ -1,65 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Magnetic Memories | Quality Check</title>
+    <title>Magnetic Memories | Professional Quality Check</title>
     <style>
         body { background-color: #fdfaf5; font-family: 'Segoe UI', sans-serif; color: #4a4a4a; padding: 20px; text-align: center; }
         .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); max-width: 500px; margin: auto; }
         h1 { color: #8c9c8e; margin-bottom: 5px; }
-        .brand-sub { font-style: italic; margin-bottom: 20px; color: #a0a0a0; }
-        .input-group { text-align: left; margin-bottom: 15px; }
-        label { font-weight: bold; font-size: 0.9em; display: block; margin-bottom: 5px; }
-        select, input, button { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0; box-sizing: border-box; }
-        button { background-color: #8c9c8e; color: white; border: none; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        label { font-weight: bold; font-size: 0.9em; display: block; text-align: left; margin-bottom: 5px; }
+        input, select, button { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0; box-sizing: border-box; margin-bottom: 15px; }
+        button { background-color: #8c9c8e; color: white; border: none; cursor: pointer; font-weight: bold; }
         #status-box { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
     </style>
 </head>
 <body>
     <div class="card">
         <h1>Magnetic Memories</h1>
-        <div class="brand-sub">Natural Style Photo Analysis</div>
+        <p>Natural Style Photo Analysis</p>
         
-        <div class="input-group">
-            <label>Customer Email Address:</label>
-            <input type="email" id="userEmail" placeholder="Enter your email" required>
-        </div>
+        <form action="https://api.web3forms.com/submit" method="POST" id="form">
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+            <input type="hidden" name="subject" value="New Quality Check from Magnetic Memories">
+            <input type="hidden" name="from_name" value="Magnetic Memories App">
 
-        <div class="input-group">
+            <label>Customer Email Address:</label>
+            <input type="email" name="customer_email" id="userEmail" placeholder="Enter your email" required>
+
             <label>Select Pack Size:</label>
-            <select id="packSize">
+            <select name="pack_size">
                 <option value="3">3 Pack</option>
                 <option value="9">9 Pack</option>
                 <option value="12">12 Pack</option>
             </select>
-        </div>
 
-        <div class="input-group">
-            <label>Upload Photos (Hold Ctrl/Cmd to select multiple):</label>
-            <input type="file" id="photoInput" multiple accept="image/*">
-        </div>
+            <label>Ready to check quality?</label>
+            <button type="submit">Analyze & Send Confirmation</button>
+        </form>
 
-        <button onclick="runAnalysis()">Analyze & Confirm</button>
         <div id="status-box"></div>
     </div>
 
     <script>
-        function runAnalysis() {
-            const email = document.getElementById('userEmail').value;
-            const files = document.getElementById('photoInput').files;
-            const display = document.getElementById('status-box');
+        const form = document.getElementById('form');
+        const status = document.getElementById('status-box');
 
-            if (!email.includes("@")) {
-                alert("Please enter a valid email address.");
-                return;
-            }
-            if (files.length === 0) {
-                alert("Please upload at least one photo.");
-                return;
-            }
-            
-            display.style.display = 'block';
-            display.innerHTML = "✨ <b>Analysis Complete!</b><br>Quality passed for " + files.length + " photos.<br><br>📧 A confirmation has been prepared for <b>" + email + "</b>.";
-        }
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            status.style.display = "block";
+            status.innerHTML = "✨ Processing Analysis...";
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: json
+                })
+                .then(async (response) => {
+                    if (response.status == 200) {
+                        status.innerHTML = "✅ <b>Analysis Sent!</b> Check your inbox at " + document.getElementById('userEmail').value;
+                    } else {
+                        status.innerHTML = "❌ Error: Could not send.";
+                    }
+                })
+                .catch(error => {
+                    status.innerHTML = "❌ Error: " + error;
+                })
+                .then(function() {
+                    form.reset();
+                });
+        });
     </script>
 </body>
 </html>
