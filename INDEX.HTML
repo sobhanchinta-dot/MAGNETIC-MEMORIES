@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Magnetic Memories | Quality Check</title>
+    <style>
+        body { background-color: #fdfaf5; font-family: 'Segoe UI', sans-serif; color: #4a4a4a; padding: 40px; text-align: center; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); max-width: 450px; margin: auto; }
+        h1 { color: #8c9c8e; margin-bottom: 5px; } /* Sage Green */
+        .brand-sub { font-style: italic; margin-bottom: 25px; color: #a0a0a0; }
+        select, input, button { margin: 10px 0; width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #e0e0e0; box-sizing: border-box; }
+        button { background-color: #8c9c8e; color: white; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        button:hover { background-color: #7a8a7c; }
+        #hazard { color: #d9534f; font-weight: bold; margin-top: 20px; display: none; padding: 10px; border: 1px solid #d9534f; border-radius: 8px; }
+        #results { margin-top: 20px; text-align: left; font-size: 0.9em; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Magnetic Memories</h1>
+        <div class="brand-sub">Natural Style Photo Analysis</div>
+        
+        <label>Select Your Pack Size:</label>
+        <select id="packSize">
+            <option value="3">3 Pack</option>
+            <option value="9">9 Pack</option>
+            <option value="12">12 Pack</option>
+            <option value="15">15 Pack</option>
+        </select>
+
+        <label>Upload Photos:</label>
+        <input type="file" id="photoInput" multiple accept="image/*">
+        
+        <button onclick="startAnalysis()">Analyze Memories</button>
+
+        <div id="hazard">STATUS: CRITICAL HAZARD - Count Mismatch</div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function startAnalysis() {
+            const count = document.getElementById('photoInput').files.length;
+            const pack = parseInt(document.getElementById('packSize').value);
+            const hazard = document.getElementById('hazard');
+            const results = document.getElementById('results');
+            
+            if (count !== pack) {
+                hazard.style.display = 'block';
+                results.innerHTML = "";
+            } else {
+                hazard.style.display = 'none';
+                results.innerHTML = "✨ <b>Count matches!</b> Ready to connect to Gemini AI for quality and border analysis.";
+            }
+        }
+    </script>
+</body>
+</html>
