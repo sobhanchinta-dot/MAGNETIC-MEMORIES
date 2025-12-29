@@ -17,10 +17,9 @@
         <h1>Magnetic Memories</h1>
         <p>Natural Style Photo Analysis</p>
         
-        <form action="https://api.web3forms.com/submit" method="POST" id="form">
+        <form action="https://api.web3forms.com/submit" method="POST" id="form" enctype="multipart/form-data">
             <input type="hidden" name="access_key" value="5cc0ba8b-1f48-463d-a282-07db5992f33d">
-            <input type="hidden" name="subject" value="New Quality Check from Magnetic Memories">
-            <input type="hidden" name="from_name" value="Magnetic Memories App">
+            <input type="hidden" name="subject" value="New Quality Check Order">
 
             <label>Customer Email Address:</label>
             <input type="email" name="customer_email" id="userEmail" placeholder="Enter your email" required>
@@ -32,7 +31,9 @@
                 <option value="12">12 Pack</option>
             </select>
 
-            <label>Ready to check quality?</label>
+            <label>Upload Photos (Select all your images):</label>
+            <input type="file" name="attachment" id="photoInput" multiple accept="image/*" required>
+
             <button type="submit">Analyze & Send Confirmation</button>
         </form>
 
@@ -46,30 +47,25 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             status.style.display = "block";
-            status.innerHTML = "✨ Processing Analysis...";
+            status.innerHTML = "✨ Processing Analysis & Uploading...";
 
             const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
 
             fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: json
-                })
-                .then(async (response) => {
-                    if (response.status == 200) {
-                        status.innerHTML = "✅ <b>Analysis Sent!</b> Check your inbox at " + document.getElementById('userEmail').value;
-                    } else {
-                        status.innerHTML = "❌ Error: Could not send.";
-                    }
-                })
-                .catch(error => {
-                    status.innerHTML = "❌ Error: " + error;
-                })
-                .then(function() {
+                method: 'POST',
+                body: formData
+            })
+            .then(async (response) => {
+                if (response.status == 200) {
+                    status.innerHTML = "✅ <b>Analysis Sent!</b> Check your Gmail inbox (" + document.getElementById('userEmail').value + ") for the confirmation.";
                     form.reset();
-                });
+                } else {
+                    status.innerHTML = "❌ Error: Could not send photos. Check file sizes.";
+                }
+            })
+            .catch(error => {
+                status.innerHTML = "❌ Error: " + error;
+            });
         });
     </script>
 </body>
