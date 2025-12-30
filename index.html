@@ -36,15 +36,37 @@
         }
 
         h1 { color: var(--gold-border); letter-spacing: 5px; text-transform: uppercase; font-size: 1.8em; margin: 0 0 5px 0; }
-        .tagline { color: #fcf6ba; font-size: 0.85em; font-style: italic; margin-bottom: 25px; display: block; }
-        .tagline span { color: var(--gold-border); margin: 0 5px; font-style: normal; }
+
+        /* STRICTLY ALIGNED TAGLINE */
+        .tagline { 
+            color: #fcf6ba; 
+            font-size: 0.85em; 
+            font-style: italic; 
+            margin-bottom: 25px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            width: 100%;
+        }
+
+        .tagline span { 
+            color: var(--gold-border); 
+            font-style: normal; 
+            display: inline-block;
+            font-size: 1.2em;
+        }
+
         .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        
         label { display: block; text-align: left; color: var(--gold-border); font-weight: bold; font-size: 0.65em; text-transform: uppercase; margin-bottom: 5px; }
+        
         input[type="email"], select {
             width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--gold-border);
             background: rgba(255, 255, 255, 0.05); color: white; outline: none; box-sizing: border-box;
         }
 
+        /* STRICT 3-COLUMN GRID */
         #gallery-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr) !important;
@@ -68,24 +90,12 @@
         
         .file-input { position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2; }
 
-        /* The Cancel/Delete Button */
         .cancel-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: var(--midnight-blue);
-            color: var(--gold-border);
-            border: 1px solid var(--gold-border);
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 12px;
-            line-height: 16px;
-            text-align: center;
-            cursor: pointer;
-            z-index: 10;
-            display: none;
-            font-weight: bold;
+            position: absolute; top: 5px; right: 5px; background: var(--midnight-blue);
+            color: var(--gold-border); border: 1px solid var(--gold-border);
+            border-radius: 50%; width: 18px; height: 18px; font-size: 12px;
+            line-height: 16px; text-align: center; cursor: pointer; z-index: 10;
+            display: none; font-weight: bold;
         }
 
         button[type="submit"] {
@@ -99,7 +109,9 @@
 
 <div class="card">
     <h1>Lodestone Snaps</h1>
-    <div class="tagline"><span>♥</span> Naturally bonded. Permanently grounded. Always in your heart. <span>♥</span></div>
+    <div class="tagline">
+        <span>♥</span> Naturally bonded. Permanently grounded. Always in your heart. <span>♥</span>
+    </div>
 
     <form action="https://getform.io/f/akkenwoa" method="POST" enctype="multipart/form-data">
         <div style="margin-bottom: 15px;">
@@ -162,7 +174,7 @@
                 preview.style.display = 'block'; 
                 span.style.display = 'none'; 
                 cancel.style.display = 'block';
-                input.style.zIndex = "1"; // Move input behind cancel button
+                input.style.zIndex = "1";
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -173,13 +185,12 @@
         const input = frame.querySelector('.file-input');
         const preview = frame.querySelector('img');
         const span = frame.querySelector('span');
-        
-        input.value = ""; // Clear the file
+        input.value = ""; 
         preview.src = "";
         preview.style.display = 'none';
         span.style.display = 'block';
         btn.style.display = 'none';
-        input.style.zIndex = "2"; // Bring input back to front
+        input.style.zIndex = "2";
     }
 
     window.onload = generateGallery;
