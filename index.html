@@ -49,7 +49,7 @@
             background: rgba(255, 255, 255, 0.05); color: white; outline: none; box-sizing: border-box;
         }
 
-        /* FORCED 3-COLUMN GRID FOR ALL DEVICES */
+        /* 3-COLUMN GRID FOR ALL DEVICES */
         #gallery-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr) !important;
@@ -66,23 +66,7 @@
             display: flex; 
             align-items: center; 
             justify-content: center;
-            cursor: pointer;
         }
-
-        /* "Tap to Swap" overlay that appears on existing photos */
-        .frame.has-image::after {
-            content: "TAP TO SWAP";
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: rgba(10, 25, 47, 0.7);
-            color: var(--gold-border);
-            font-size: 0.5em;
-            padding: 2px 0;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .frame.has-image:hover::after { opacity: 1; }
 
         .frame img { width: 100%; height: 100%; object-fit: cover; display: none; pointer-events: none; }
         .frame span { font-size: 0.5em; color: var(--gold-border); text-transform: uppercase; pointer-events: none; }
@@ -128,7 +112,7 @@
 
         <div id="gallery-container"></div>
 
-        <button type="submit">Etch My Memories</button>
+        <button type="submit">Frame My Memories</button>
     </form>
 </div>
 
@@ -160,7 +144,6 @@
                 preview.src = e.target.result; 
                 preview.style.display = 'block'; 
                 span.style.display = 'none'; 
-                frame.classList.add('has-image'); // Add swap indicator
             }
             reader.readAsDataURL(input.files[0]);
         }
