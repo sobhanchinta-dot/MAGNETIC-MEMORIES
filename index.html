@@ -43,7 +43,6 @@
             margin-bottom: 5px; 
         }
 
-        /* Tagline with handwritten 'Memories' and Heart symbols */
         .tagline {
             color: #fcf6ba;
             font-size: 1.1em;
@@ -52,15 +51,24 @@
             display: block;
         }
 
+        /* Handwritten script for Memories and Hearts */
         .handwritten {
             font-family: 'Great Vibes', cursive;
-            font-size: 1.5em;
-            color: var(--gold-border);
+            font-size: 1.6em;
+            color: #fcf6ba; /* Matching the light gold glow */
             text-transform: none;
             margin: 0 5px;
+            display: inline-block;
+            vertical-align: middle;
         }
 
-        .heart { color: #d4af37; margin: 0 5px; font-size: 0.9em; }
+        .heart-symbol { 
+            color: #fcf6ba; 
+            margin-left: 8px; 
+            font-size: 1.2em;
+            display: inline-block;
+            vertical-align: middle;
+        }
 
         .input-group { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 30px; }
         
@@ -83,11 +91,10 @@
             margin-bottom: 40px;
         }
 
-        /* Frame logic for exact fit (No cutting edges) */
         .frame {
             aspect-ratio: 1 / 1;
             border: 3px double var(--gold-border);
-            background: #000; /* Black background behind the photo if it's a different shape */
+            background: #000;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -98,7 +105,7 @@
         .frame img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* This ensures the WHOLE photo is visible inside the frame */
+            object-fit: contain; /* Exact fit, no cutting edges */
             display: none;
         }
 
@@ -138,7 +145,7 @@
 <div class="card">
     <h1>Magnetic Memories</h1>
     <div class="tagline">
-        Capturing the <span class="handwritten">Memories</span> that never wipe off our hearts <span class="heart">❤</span>
+        Capturing the <span class="handwritten">Memories</span> that never wipe off our <span class="handwritten">Hearts</span> <span class="heart-symbol">❤</span>
     </div>
 
     <form action="https://getform.io/f/akkenwoa" method="POST" enctype="multipart/form-data">
