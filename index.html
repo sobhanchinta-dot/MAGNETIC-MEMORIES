@@ -3,58 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magnetic Memories | Premium Photo Quality Analysis</title>
+    <title>Magnetic Memories | Luxury Quality Analysis</title>
     <style>
+        :root {
+            --rich-gold: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --midnight-blue: #001f3f;
+            --soft-gold: #d4af37;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #001f3f 0%, #003366 100%); /* Midnight Blue Background */
-            color: #ffffff;
+            font-family: 'Playfair Display', serif, 'Segoe UI';
+            /* Rich Metallic Gold Background */
+            background: var(--rich-gold);
+            color: var(--midnight-blue);
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
+
         .card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            max-width: 450px;
-            width: 90%;
-            border: 1px solid #d4af37; /* Metallic Gold Border */
+            -webkit-backdrop-filter: blur(15px);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            max-width: 550px;
+            width: 100%;
+            border: 3px solid var(--midnight-blue);
             text-align: center;
         }
-        h1 { color: #d4af37; font-weight: 300; letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase; font-size: 1.5em; }
-        p { color: #e0e0e0; font-size: 0.9em; margin-bottom: 25px; }
-        label { font-weight: 600; font-size: 0.8em; display: block; text-align: left; margin-bottom: 8px; color: #d4af37; }
+
+        h1 { 
+            color: var(--midnight-blue); 
+            font-weight: 900; 
+            letter-spacing: 4px; 
+            margin-bottom: 10px; 
+            text-transform: uppercase; 
+            font-size: 1.8em;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+        }
+
+        p { 
+            color: #003366; 
+            font-size: 1em; 
+            margin-bottom: 35px; 
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        label { 
+            font-weight: 800; 
+            font-size: 0.75em; 
+            display: block; 
+            text-align: left; 
+            margin-bottom: 10px; 
+            color: var(--midnight-blue);
+            text-transform: uppercase;
+        }
+        
         input, select {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            border: 2px solid var(--midnight-blue);
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--midnight-blue);
             box-sizing: border-box;
             outline: none;
+            font-weight: 700;
+            transition: 0.3s;
         }
-        input::placeholder { color: #bbb; }
-        option { background: #001f3f; color: white; }
+
+        input:focus {
+            box-shadow: 0 0 10px rgba(0, 31, 63, 0.2);
+            background: white;
+        }
+
+        option { background: #fcf6ba; color: var(--midnight-blue); }
+
+        #upload-container {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .upload-slot {
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px dashed var(--midnight-blue);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .upload-slot:hover {
+            background: white;
+        }
+
         button {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(45deg, #d4af37, #f4cf6d); /* Gold Gradient Button */
-            color: #001f3f;
+            padding: 20px;
+            background: var(--midnight-blue); 
+            color: #fcf6ba; /* Gold text on blue button */
             border: none;
-            border-radius: 12px;
-            font-weight: bold;
+            border-radius: 15px;
+            font-weight: 900;
             text-transform: uppercase;
+            letter-spacing: 3px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0, 31, 63, 0.4);
         }
-        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+
+        button:hover { 
+            background: #003366;
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 31, 63, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -65,21 +134,47 @@
 
     <form action="https://getform.io/f/akkenwoa" method="POST" enctype="multipart/form-data">
         
-        <label>YOUR EMAIL</label>
-        <input type="email" name="customer_email" placeholder="Enter your email" required>
+        <label>Personal Contact</label>
+        <input type="email" name="customer_email" placeholder="client@luxury.com" required>
 
-        <label>SELECT PHOTO SIZE</label>
-        <select name="photo_size">
-            <option value="50x50mm">Square (50 x 50mm)</option>
-            <option value="54x78mm">Classic (54 x 78mm)</option>
+        <label>Selected Collection</label>
+        <select id="photo-qty" name="bundle_quantity" onchange="generateSlots()">
+            <option value="3">The Trio Bundle (3 Photos)</option>
+            <option value="6">The Classic Set (6 Photos)</option>
+            <option value="9">The Signature Collection (9 Photos)</option>
         </select>
 
-        <label>UPLOAD YOUR PHOTOS</label>
-        <input type="file" name="attachment" multiple accept="image/*" required>
+        <label>Bespoke Magnet Size</label>
+        <select name="photo_size">
+            <option value="50x50mm">Luxe Square (50 x 50mm)</option>
+            <option value="54x78mm">Grand Classic (54 x 78mm)</option>
+        </select>
 
-        <button type="submit">ANALYZE & SUBMIT</button>
+        <div id="upload-container">
+            </div>
+
+        <button type="submit">Begin Analysis</button>
     </form>
 </div>
+
+<script>
+    function generateSlots() {
+        const qty = document.getElementById('photo-qty').value;
+        const container = document.getElementById('upload-container');
+        container.innerHTML = `<label>Upload Your ${qty} Masterpieces</label>`;
+        
+        for (let i = 1; i <= qty; i++) {
+            const div = document.createElement('div');
+            div.className = 'upload-slot';
+            div.innerHTML = `
+                <span style="font-size: 10px; font-weight: 900; color: #001f3f; letter-spacing: 1px;">MEMORABILIA #${i}</span>
+                <input type="file" name="file_${i}" accept="image/*" required style="margin-bottom:0; margin-top:8px; padding:5px; border:none; background:transparent;">
+            `;
+            container.appendChild(div);
+        }
+    }
+    window.onload = generateSlots;
+</script>
 
 </body>
 </html>
