@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magnetic Memories | Bespoke Luxury</title>
+    <title>Lodestone Snaps | Bespoke Luxury</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         :root {
             --royal-gold: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --midnight-blue: #0a192f;
             --gold-border: #d4af37;
+            --rose-heart: #e5b38a; /* Sophisticated Rose Gold for the heart */
         }
 
         body {
@@ -39,7 +40,7 @@
             color: var(--gold-border); 
             letter-spacing: 5px; 
             text-transform: uppercase; 
-            font-size: 2.2em; 
+            font-size: 2.5em; 
             margin-bottom: 5px; 
         }
 
@@ -49,13 +50,14 @@
             margin-bottom: 35px;
             letter-spacing: 1px;
             display: block;
+            line-height: 1.6;
         }
 
-        /* Handwritten script for Memories and Hearts */
+        /* Handwritten script for 'heart' */
         .handwritten {
             font-family: 'Great Vibes', cursive;
-            font-size: 1.6em;
-            color: #fcf6ba; /* Matching the light gold glow */
+            font-size: 1.7em;
+            color: var(--rose-heart); 
             text-transform: none;
             margin: 0 5px;
             display: inline-block;
@@ -63,11 +65,12 @@
         }
 
         .heart-symbol { 
-            color: #fcf6ba; 
-            margin-left: 8px; 
-            font-size: 1.2em;
+            color: var(--rose-heart); 
+            margin: 0 5px; 
+            font-size: 1.3em;
             display: inline-block;
             vertical-align: middle;
+            filter: drop-shadow(0 0 5px rgba(229, 179, 138, 0.4));
         }
 
         .input-group { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 30px; }
@@ -82,6 +85,7 @@
             background: rgba(255, 255, 255, 0.05);
             color: white;
             outline: none;
+            font-family: inherit;
         }
 
         #gallery-container {
@@ -91,6 +95,7 @@
             margin-bottom: 40px;
         }
 
+        /* Frame logic for exact fit (No cutting edges) */
         .frame {
             aspect-ratio: 1 / 1;
             border: 3px double var(--gold-border);
@@ -100,12 +105,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.3s;
         }
 
         .frame img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain; /* Exact fit, no cutting edges */
+            object-fit: contain; /* Ensures photo fits exactly without cutting */
             display: none;
         }
 
@@ -143,9 +149,9 @@
 <body>
 
 <div class="card">
-    <h1>Magnetic Memories</h1>
+    <h1>Lodestone Snaps</h1>
     <div class="tagline">
-        Capturing the <span class="handwritten">Memories</span> that never wipe off our <span class="handwritten">Hearts</span> <span class="heart-symbol">❤</span>
+        <span class="heart-symbol">❤</span> Naturally bonded. Permanently grounded. Always in your <span class="handwritten">heart</span>. <span class="heart-symbol">❤</span>
     </div>
 
     <form action="https://getform.io/f/akkenwoa" method="POST" enctype="multipart/form-data">
@@ -157,9 +163,9 @@
             <div>
                 <label>Bespoke Collection</label>
                 <select id="photo-qty" name="bundle" onchange="generateGallery()">
-                    <option value="3">Trio Set (3)</option>
-                    <option value="6">Classic Set (6)</option>
-                    <option value="9">Signature Set (9)</option>
+                    <option value="3">The Trio Set (3)</option>
+                    <option value="6">The Classic Set (6)</option>
+                    <option value="9">The Signature Set (9)</option>
                 </select>
             </div>
             <div>
