@@ -37,7 +37,7 @@
 
         h1 { color: var(--gold-border); letter-spacing: 5px; text-transform: uppercase; font-size: 1.8em; margin: 0 0 5px 0; }
 
-        /* STRICTLY ALIGNED TAGLINE */
+        /* FIXED TAGLINE ALIGNMENT FOR ALL DEVICES */
         .tagline { 
             color: #fcf6ba; 
             font-size: 0.85em; 
@@ -48,13 +48,14 @@
             justify-content: center; 
             gap: 8px; 
             width: 100%;
+            line-height: 1.4;
         }
 
         .tagline span { 
             color: var(--gold-border); 
             font-style: normal; 
-            display: inline-block;
             font-size: 1.2em;
+            flex-shrink: 0;
         }
 
         .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
@@ -66,7 +67,7 @@
             background: rgba(255, 255, 255, 0.05); color: white; outline: none; box-sizing: border-box;
         }
 
-        /* STRICT 3-COLUMN GRID */
+        /* STRICT 3-COLUMN GRID LOCKED FOR ALL DEVICES */
         #gallery-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr) !important;
@@ -86,16 +87,27 @@
         }
 
         .frame img { width: 100%; height: 100%; object-fit: cover; display: none; }
-        .frame span { font-size: 0.5em; color: var(--gold-border); text-transform: uppercase; }
+        .frame span { font-size: 0.5em; color: var(--gold-border); text-transform: uppercase; padding: 5px; }
         
         .file-input { position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2; }
 
         .cancel-btn {
-            position: absolute; top: 5px; right: 5px; background: var(--midnight-blue);
-            color: var(--gold-border); border: 1px solid var(--gold-border);
-            border-radius: 50%; width: 18px; height: 18px; font-size: 12px;
-            line-height: 16px; text-align: center; cursor: pointer; z-index: 10;
-            display: none; font-weight: bold;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: var(--midnight-blue);
+            color: var(--gold-border);
+            border: 1px solid var(--gold-border);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            line-height: 18px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 10;
+            display: none;
+            font-weight: bold;
         }
 
         button[type="submit"] {
@@ -174,7 +186,7 @@
                 preview.style.display = 'block'; 
                 span.style.display = 'none'; 
                 cancel.style.display = 'block';
-                input.style.zIndex = "1";
+                input.style.zIndex = "1"; 
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -190,7 +202,7 @@
         preview.style.display = 'none';
         span.style.display = 'block';
         btn.style.display = 'none';
-        input.style.zIndex = "2";
+        input.style.zIndex = "2"; 
     }
 
     window.onload = generateGallery;
